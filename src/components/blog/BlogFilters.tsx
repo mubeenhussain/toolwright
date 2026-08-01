@@ -6,10 +6,10 @@ import type { ToolCategory } from "@/lib/tools";
 
 const filters: { value: string; label: string }[] = [
   { value: "all", label: "All" },
+  { value: "nutrition", label: "Diet & Nutrition" },
   { value: "finance", label: "Finance" },
   { value: "fitness", label: "Fitness" },
   { value: "pregnancy", label: "Pregnancy" },
-  { value: "nutrition", label: "Nutrition" },
   { value: "calculators", label: "Everyday" },
 ];
 

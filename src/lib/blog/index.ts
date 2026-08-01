@@ -1,4 +1,5 @@
 import { curatedByToolSlug, curatedPosts } from "@/lib/blog/curated";
+import { dietPosts } from "@/lib/blog/diet-posts";
 import { generateToolPost } from "@/lib/blog/generate";
 import { coverForTool, curatedCoverByTool } from "@/lib/blog/images";
 import type { BlogListItem, BlogPost } from "@/lib/blog/types";
@@ -38,10 +39,13 @@ export function getAllBlogPosts(): BlogPost[] {
     return withCover(curated ?? generateToolPost(tool));
   });
 
-  // Include any curated posts whose toolSlug might be missing (safety)
+  // Extra editorial posts (diet plans, etc.) + any curated with unique slugs
   const slugs = new Set(generated.map((p) => p.slug));
-  for (const post of curatedPosts) {
-    if (!slugs.has(post.slug)) generated.push(withCover(post));
+  for (const post of [...curatedPosts, ...dietPosts]) {
+    if (!slugs.has(post.slug)) {
+      generated.push(withCover(post));
+      slugs.add(post.slug);
+    }
   }
 
   return generated.sort(

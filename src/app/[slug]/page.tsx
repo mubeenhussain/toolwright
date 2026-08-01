@@ -112,7 +112,9 @@ export default async function ToolPage({ params }: PageProps) {
   const related = getRelatedTools(tool, 8);
   const categoryHref = `/tools?category=${tool.category}`;
   const categoryLabel = categories[tool.category].label;
-  const guide = getBlogPostsByTool(tool.slug)[0];
+  const guides = getBlogPostsByTool(tool.slug)
+    .sort((a, b) => Number(!!b.featured) - Number(!!a.featured))
+    .slice(0, 3);
 
   return (
     <>
@@ -177,18 +179,26 @@ export default async function ToolPage({ params }: PageProps) {
           <ToolWorkspace slug={tool.slug} />
         </section>
 
-        {guide ? (
+        {guides.length > 0 ? (
           <aside className="mt-6 max-w-3xl border border-line bg-bg-elevated p-4 text-sm">
-            <p className="font-semibold text-ink">Read the planning guide</p>
-            <p className="mt-1 text-ink-muted">
-              Practical tips for using this calculator in real decisions.
+            <p className="font-semibold text-ink">
+              {guides.length > 1 ? "Related guides & diet plans" : "Read the planning guide"}
             </p>
-            <Link
-              href={`/blog/${guide.slug}`}
-              className="mt-2 inline-block font-semibold text-accent hover:underline"
-            >
-              {guide.title} →
-            </Link>
+            <p className="mt-1 text-ink-muted">
+              Practical articles that pair with this calculator.
+            </p>
+            <ul className="mt-2 space-y-1.5">
+              {guides.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={`/blog/${item.slug}`}
+                    className="font-semibold text-accent hover:underline"
+                  >
+                    {item.title} →
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </aside>
         ) : null}
 

@@ -28,9 +28,9 @@ export async function generateMetadata({
   const category = params.category;
   const title = category
     ? `${category[0]?.toUpperCase()}${category.slice(1)} guides`
-    : "Calculator guides & planning tips";
+    : "Diet plans & calculator guides";
   const description =
-    "Practical blog guides for every Toolwright calculator — mortgage, health, pregnancy, loans, and more — with clear next steps.";
+    "Free American diet plans, calorie strategies, and calculator guides from Toolwright — mortgage, health, pregnancy, macros, and more.";
   const url = absoluteUrl(
     category ? `/blog?category=${category}` : "/blog",
   );
@@ -98,12 +98,12 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
             Guides
           </p>
           <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            Calculator guides that help you decide
+            Diet plans, money guides & calculator tips
           </h1>
           <p className="mt-3 text-base leading-relaxed text-ink-muted">
-            Practical plans for real budgets and real decisions. Each guide pairs
-            with a free Toolwright calculator so you can run the numbers in one
-            tab.
+            Fresh American diet plans, calorie strategies, and practical
+            calculator guides — each one links to a free Toolwright tool so you
+            can run the numbers in one tab.
           </p>
         </header>
 

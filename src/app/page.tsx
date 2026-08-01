@@ -2,6 +2,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { SafeImage } from "@/components/SafeImage";
 import { ToolIcon } from "@/components/ToolIcon";
+import { dietPosts } from "@/lib/blog/diet-posts";
 import { coverForTool } from "@/lib/blog/images";
 import {
   organizationJsonLd,
@@ -278,7 +279,7 @@ export default function HomePage() {
                         {tool.description}
                       </p>
                       <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent">
-                        Open free
+                        
                         <span
                           aria-hidden
                           className="transition-transform group-hover:translate-x-0.5"
@@ -333,6 +334,59 @@ export default function HomePage() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 sm:py-12">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+                American diet plans that bring people back
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm text-ink-muted">
+                Timely guides inspired by the latest U.S. nutrition conversation —
+                each article ends in a free Toolwright calculator.
+              </p>
+            </div>
+            <Link
+              href="/blog?category=nutrition"
+              className="text-sm font-semibold text-accent hover:underline"
+            >
+              All diet & nutrition guides →
+            </Link>
+          </div>
+          <ul className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {dietPosts.slice(0, 3).map((post) => (
+              <li key={post.slug}>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-white hover:border-accent"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[linear-gradient(135deg,#dbeafe,#e5e7eb)]">
+                    <SafeImage
+                      src={post.cover.src}
+                      alt={post.cover.alt}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-4">
+                    <h3 className="font-display text-base font-bold text-ink group-hover:text-accent">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 line-clamp-2 flex-1 text-sm text-ink-muted">
+                      {post.excerpt}
+                    </p>
+                    <span className="mt-3 text-sm font-semibold text-accent">
+                      Read guide →
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
