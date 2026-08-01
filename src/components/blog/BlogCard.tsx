@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { SafeImage } from "@/components/SafeImage";
 import type { BlogListItem } from "@/lib/blog/types";
 import { categories } from "@/lib/tools";
 
@@ -17,8 +17,8 @@ export function BlogCard({ post }: { post: BlogListItem }) {
       href={`/blog/${post.slug}`}
       className="group flex h-full flex-col overflow-hidden border border-line bg-white transition-colors hover:border-accent"
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-bg-elevated">
-        <Image
+      <div className="relative aspect-[16/10] overflow-hidden bg-[linear-gradient(135deg,#dbeafe,#e5e7eb)]">
+        <SafeImage
           src={post.cover.src}
           alt={post.cover.alt}
           fill

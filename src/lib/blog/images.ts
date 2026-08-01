@@ -81,10 +81,10 @@ const pool = {
     creditUrl: "https://unsplash.com/photos/man-running-on-road-near-trees-during-daytime-jFrcXLbh0zY",
   },
   healthyFood: {
-    src: U("photo-1490645935967-10de080d0dc4"),
-    alt: "Healthy meal prep bowls",
-    credit: "Brooke Lark",
-    creditUrl: "https://unsplash.com/photos/vegetable-salad-on-white-ceramic-bowl-jUPOICA3eIc",
+    src: U("photo-1512621776951-a57141f2eefd"),
+    alt: "Colorful healthy vegetable bowl",
+    credit: "Anna Pelzer",
+    creditUrl: "https://unsplash.com/photos/vegetable-salad-on-white-ceramic-plate-IGfIGP5ONV0",
   },
   pregnancy: {
     src: U("photo-1515488042361-ee00e0ddd4e4"),

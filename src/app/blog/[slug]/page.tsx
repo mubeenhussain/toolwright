@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
+import { SafeImage } from "@/components/SafeImage";
 import { getAllBlogSlugs } from "@/lib/blog";
 import { loadBlogPost } from "@/lib/blog/api-client";
 import { breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
@@ -152,8 +152,8 @@ export default async function BlogPostPage({ params }: PageProps) {
           </p>
         </header>
 
-        <figure className="relative mt-8 aspect-[16/9] overflow-hidden border border-line bg-bg-elevated">
-          <Image
+        <figure className="relative mt-8 aspect-[16/9] overflow-hidden border border-line bg-[linear-gradient(135deg,#dbeafe,#e5e7eb)]">
+          <SafeImage
             src={post.cover.src}
             alt={post.cover.alt}
             fill

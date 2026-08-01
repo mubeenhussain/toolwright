@@ -160,3 +160,25 @@ a {
   letter-spacing: 0.06em;
   color: var(--ink-faint);
 }
+
+@keyframes hero-fade {
+  from {
+    opacity: 0.55;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
