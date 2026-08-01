@@ -64,6 +64,8 @@ export default async function ToolsIndexPage({ searchParams }: PageProps) {
   if (selected) {
     const list = tools.filter((tool) => tool.category === selected);
     const meta = categories[selected];
+    const featured = list.filter((tool) => tool.featured);
+    const rest = list.filter((tool) => !tool.featured);
 
     return (
       <>
@@ -105,22 +107,55 @@ export default async function ToolsIndexPage({ searchParams }: PageProps) {
             </Link>
           </div>
 
-          <header className="mt-4 max-w-3xl">
-            <CategoryVisual category={selected} />
-            <h1 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              {meta.label}
-            </h1>
-            <p className="mt-2 text-base text-ink-muted">{meta.description}</p>
-            <p className="mt-1 text-sm text-ink-faint">
-              {list.length} tool{list.length === 1 ? "" : "s"}
-            </p>
+          <header className="mt-4 overflow-hidden rounded-xl border border-line bg-white">
+            <div className="flex flex-col gap-4 bg-[linear-gradient(135deg,#f8faff_0%,#ffffff_55%,#eef5ff_100%)] p-5 sm:flex-row sm:items-end sm:justify-between sm:p-7">
+              <div className="max-w-2xl">
+                <CategoryVisual category={selected} />
+                <h1 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                  {meta.label}
+                </h1>
+                <p className="mt-2 text-base text-ink-muted">
+                  {meta.description}
+                </p>
+              </div>
+              <div className="shrink-0 rounded-lg border border-line bg-white px-4 py-3 text-center">
+                <p className="font-display text-2xl font-bold text-accent">
+                  {list.length}
+                </p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
+                  tools
+                </p>
+              </div>
+            </div>
           </header>
 
-          <div className="mt-6">
-            {list.map((tool) => (
-              <ToolLink key={tool.slug} tool={tool} />
-            ))}
-          </div>
+          {featured.length > 0 ? (
+            <section className="mt-8">
+              <h2 className="mb-3 font-display text-lg font-bold text-ink">
+                Popular in this category
+              </h2>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {featured.map((tool) => (
+                  <ToolLink key={`featured-${tool.slug}`} tool={tool} />
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {rest.length > 0 ? (
+            <section className="mt-8">
+              <h2 className="mb-3 font-display text-lg font-bold text-ink">
+                {featured.length > 0
+                  ? "More tools"
+                  : `All ${meta.label.toLowerCase()}`}
+              </h2>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {rest.map((tool) => (
+                  <ToolLink key={tool.slug} tool={tool} />
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       </>
     );
