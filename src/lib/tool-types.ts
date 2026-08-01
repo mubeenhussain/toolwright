@@ -1,5 +1,6 @@
 export type ToolCategory =
   | "calculators"
+  | "finance"
   | "fitness"
   | "pregnancy"
   | "nutrition"

@@ -1,3 +1,4 @@
+import { financeTools } from "@/lib/finance-tools";
 import { healthTools } from "@/lib/health-tools";
 import type { ToolCategory, ToolDefinition } from "@/lib/tool-types";
 
@@ -10,6 +11,11 @@ export const categories: Record<
   calculators: {
     label: "Calculators",
     description: "Date, age, and everyday math utilities that answer fast.",
+  },
+  finance: {
+    label: "Financial Calculators",
+    description:
+      "Mortgage, loans, investing, retirement, taxes, credit, and more.",
   },
   fitness: {
     label: "Fitness & Health",
@@ -46,6 +52,7 @@ export const categories: Record<
 };
 
 export const tools: ToolDefinition[] = [
+  ...financeTools,
   ...healthTools,
   {
     slug: "age-calculator",

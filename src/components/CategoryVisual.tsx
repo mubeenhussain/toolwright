@@ -28,6 +28,12 @@ function Svg({
 
 export function CategoryIcon({ category }: { category: ToolCategory }) {
   switch (category) {
+    case "finance":
+      return (
+        <Svg label="Finance">
+          <path d="M12 3v18M8 8h6.5a2.5 2.5 0 0 1 0 5H9.5a2.5 2.5 0 0 0 0 5H16" />
+        </Svg>
+      );
     case "fitness":
       return (
         <Svg label="Fitness">
@@ -93,6 +99,7 @@ export function CategoryIcon({ category }: { category: ToolCategory }) {
 }
 
 const tones: Record<ToolCategory, string> = {
+  finance: "bg-[#ecfdf5] text-[#047857]",
   fitness: "bg-[#e8f0fe] text-[#1d4ed8]",
   pregnancy: "bg-[#ffe4e6] text-[#be123c]",
   nutrition: "bg-[#fff7ed] text-[#c2410c]",

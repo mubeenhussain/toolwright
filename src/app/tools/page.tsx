@@ -10,7 +10,7 @@ import { categories, tools, type ToolCategory } from "@/lib/tools";
 export const metadata: Metadata = {
   title: "All Free Online Tools",
   description:
-    "Browse free online tools from Toolwright: BMI, calorie, pregnancy, TDEE, age calculator, and more.",
+    "Browse free online tools from Toolwright: mortgage, loan, BMI, calorie, pregnancy, TDEE, age calculator, and more.",
   alternates: {
     canonical: absoluteUrl("/tools"),
   },
@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 };
 
 const order: ToolCategory[] = [
+  "finance",
   "fitness",
   "pregnancy",
   "nutrition",

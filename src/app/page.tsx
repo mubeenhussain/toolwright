@@ -11,14 +11,14 @@ import { getToolBySlug, tools } from "@/lib/tools";
 import type { ToolCategory } from "@/lib/tool-types";
 
 const popularSlugs = [
+  "mortgage-calculator",
+  "compound-interest-calculator",
   "bmi-calculator",
+  "loan-calculator",
   "due-date-calculator",
+  "auto-loan-calculator",
   "calorie-calculator",
-  "age-calculator",
-  "tdee-calculator",
-  "ovulation-calculator",
-  "macro-calculator",
-  "password-generator",
+  "take-home-paycheck-calculator",
 ] as const;
 
 const categoryBrowse: {
@@ -27,6 +27,12 @@ const categoryBrowse: {
   label: string;
   blurb: string;
 }[] = [
+  {
+    category: "finance",
+    href: "/tools?category=finance",
+    label: "Financial",
+    blurb: "Mortgage, loans, investing, taxes",
+  },
   {
     category: "fitness",
     href: "/tools?category=fitness",
@@ -68,7 +74,7 @@ const whyBest = [
   },
   {
     title: "One toolkit, not a scavenger hunt",
-    body: "Fitness, pregnancy, nutrition, and everyday tools in one place. Stop hopping between five mediocre sites for five answers.",
+    body: "Fitness, pregnancy, nutrition, finance, and everyday tools in one place. Stop hopping between five mediocre sites for five answers.",
   },
 ] as const;
 
