@@ -3,6 +3,7 @@ import { siteConfig } from "@/lib/site";
 
 const links = [
   { href: "/tools", label: "Tools" },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
 ];
 

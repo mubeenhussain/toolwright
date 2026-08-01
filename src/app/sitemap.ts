@@ -1,3 +1,4 @@
+import { getAllBlogPosts } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
 import { tools } from "@/lib/tools";
 import type { MetadataRoute } from "next";
@@ -17,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "daily",
       priority: 0.95,
+    },
+    {
+      url: `${siteConfig.url}/blog`,
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.92,
     },
     {
       url: `${siteConfig.url}/about`,
@@ -45,5 +52,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: tool.featured ? 0.9 : 0.75,
   }));
 
-  return [...staticRoutes, ...toolRoutes];
+  const blogRoutes: MetadataRoute.Sitemap = getAllBlogPosts().map((post) => ({
+    url: `${siteConfig.url}/blog/${post.slug}`,
+    lastModified: new Date(post.updatedAt),
+    changeFrequency: post.featured ? ("weekly" as const) : ("monthly" as const),
+    priority: post.featured ? 0.85 : 0.7,
+  }));
+
+  return [...staticRoutes, ...toolRoutes, ...blogRoutes];
 }

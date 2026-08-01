@@ -13,6 +13,7 @@ import {
   toolJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site";
+import { getBlogPostsByTool } from "@/lib/blog";
 import {
   categories,
   getAllToolSlugs,
@@ -29,6 +30,7 @@ const reserved = new Set([
   "about",
   "privacy",
   "terms",
+  "blog",
   "api",
   "sitemap.xml",
   "robots.txt",
@@ -110,6 +112,7 @@ export default async function ToolPage({ params }: PageProps) {
   const related = getRelatedTools(tool, 8);
   const categoryHref = `/tools?category=${tool.category}`;
   const categoryLabel = categories[tool.category].label;
+  const guide = getBlogPostsByTool(tool.slug)[0];
 
   return (
     <>
@@ -173,6 +176,21 @@ export default async function ToolPage({ params }: PageProps) {
         <section aria-label={`${tool.name} workspace`} className="mt-6">
           <ToolWorkspace slug={tool.slug} />
         </section>
+
+        {guide ? (
+          <aside className="mt-6 max-w-3xl border border-line bg-bg-elevated p-4 text-sm">
+            <p className="font-semibold text-ink">Read the planning guide</p>
+            <p className="mt-1 text-ink-muted">
+              Practical tips for using this calculator in real decisions.
+            </p>
+            <Link
+              href={`/blog/${guide.slug}`}
+              className="mt-2 inline-block font-semibold text-accent hover:underline"
+            >
+              {guide.title} →
+            </Link>
+          </aside>
+        ) : null}
 
         <section className="mt-12 max-w-3xl">
           <h2 className="font-display text-xl font-bold tracking-tight text-ink">

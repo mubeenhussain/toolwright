@@ -70,6 +70,11 @@ export function Footer() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-ink-muted">
             <li>
+              <Link href="/blog" className="hover:text-ink">
+                Blog & guides
+              </Link>
+            </li>
+            <li>
               <Link href="/about" className="hover:text-ink">
                 About
               </Link>
