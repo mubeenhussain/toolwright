@@ -7,21 +7,6 @@ import { breadcrumbJsonLd, itemListJsonLd } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 import { categories, tools, type ToolCategory } from "@/lib/tools";
 
-export const metadata: Metadata = {
-  title: "All Free Online Tools",
-  description:
-    "Browse free online tools from Toolwright: mortgage, loan, BMI, calorie, pregnancy, TDEE, age calculator, and more.",
-  alternates: {
-    canonical: absoluteUrl("/tools"),
-  },
-  openGraph: {
-    title: `All Free Online Tools | ${siteConfig.name}`,
-    description:
-      "Browse free browser-based utilities for text, development, security, and conversion tasks.",
-    url: absoluteUrl("/tools"),
-  },
-};
-
 const order: ToolCategory[] = [
   "finance",
   "fitness",
@@ -42,6 +27,47 @@ function isCategory(value: string): value is ToolCategory {
 type PageProps = {
   searchParams: Promise<{ category?: string }>;
 };
+
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const params = await searchParams;
+  const selected =
+    params.category && isCategory(params.category) ? params.category : null;
+
+  if (selected) {
+    const meta = categories[selected];
+    const count = tools.filter((t) => t.category === selected).length;
+    const title = `Free ${meta.label}`;
+    const description = `${meta.description} Browse ${count} free online ${meta.label.toLowerCase()} on ${siteConfig.name} — instant, no signup.`;
+    const url = absoluteUrl(`/tools?category=${selected}`);
+    return {
+      title,
+      description,
+      alternates: { canonical: url },
+      openGraph: {
+        title: `${title} | ${siteConfig.name}`,
+        description,
+        url,
+      },
+    };
+  }
+
+  return {
+    title: "All Free Online Calculators & Tools",
+    description:
+      "Browse free online calculators from Toolwright: mortgage, loan, BMI, calorie, pregnancy, compound interest, paycheck, and more.",
+    alternates: {
+      canonical: absoluteUrl("/tools"),
+    },
+    openGraph: {
+      title: `All Free Online Tools | ${siteConfig.name}`,
+      description:
+        "Browse free browser-based calculators for finance, health, pregnancy, and everyday tasks.",
+      url: absoluteUrl("/tools"),
+    },
+  };
+}
 
 export default async function ToolsIndexPage({ searchParams }: PageProps) {
   const params = await searchParams;

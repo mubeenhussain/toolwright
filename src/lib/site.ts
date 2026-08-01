@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Toolwright",
   tagline: "The best free calculator site for clear, instant answers",
   description:
-    "Toolwright is the free calculator toolkit that puts the answer first — BMI, due dates, calories, age, macros, and more. No signup, US units, private by design.",
+    "Free online calculators for mortgage, loans, BMI, pregnancy, calories, taxes, and more. Instant results, US units, no signup — Toolwright.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://toolwright.site",
   locale: "en_US",
   language: "en-US",

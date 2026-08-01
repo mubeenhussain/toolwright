@@ -1,21 +1,28 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/site";
-import { tools } from "@/lib/tools";
+import { categories, tools, type ToolCategory } from "@/lib/tools";
+
+const footerCategories: ToolCategory[] = [
+  "finance",
+  "fitness",
+  "pregnancy",
+  "nutrition",
+];
 
 export function Footer() {
   const year = new Date().getFullYear();
-  const popular = tools.filter((t) => t.featured).slice(0, 5);
+  const popular = tools.filter((t) => t.featured).slice(0, 8);
 
   return (
     <footer className="relative z-10 mt-auto border-t border-line bg-bg-elevated">
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
           <p className="font-display text-xl font-bold tracking-tight text-ink">
             {siteConfig.name}
           </p>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-muted">
-            American-built free calculators for the US and the West — clear
-            answers, US units when it counts, no signup.
+            Free online calculators for mortgages, loans, health, pregnancy, and
+            everyday math — built for the US and the West.
           </p>
         </div>
         <div>
@@ -37,14 +44,31 @@ export function Footer() {
         </div>
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.08em] text-ink-faint">
-            Explore
+            Categories
           </p>
           <ul className="mt-4 space-y-2 text-sm text-ink-muted">
+            {footerCategories.map((cat) => (
+              <li key={cat}>
+                <Link
+                  href={`/tools?category=${cat}`}
+                  className="hover:text-ink"
+                >
+                  {categories[cat].label}
+                </Link>
+              </li>
+            ))}
             <li>
               <Link href="/tools" className="hover:text-ink">
                 All tools
               </Link>
             </li>
+          </ul>
+        </div>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-ink-faint">
+            Explore
+          </p>
+          <ul className="mt-4 space-y-2 text-sm text-ink-muted">
             <li>
               <Link href="/about" className="hover:text-ink">
                 About

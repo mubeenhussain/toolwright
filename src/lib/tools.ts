@@ -362,3 +362,17 @@ export function getToolsByCategory(category: ToolCategory) {
 export function getAllToolSlugs() {
   return tools.map((tool) => tool.slug);
 }
+
+/** Related tools for internal linking (same category first, then featured). */
+export function getRelatedTools(tool: ToolDefinition, limit = 8) {
+  const sameCategory = tools.filter(
+    (item) => item.category === tool.category && item.slug !== tool.slug,
+  );
+  const featured = tools.filter(
+    (item) =>
+      item.featured &&
+      item.slug !== tool.slug &&
+      !sameCategory.some((s) => s.slug === item.slug),
+  );
+  return [...sameCategory, ...featured].slice(0, limit);
+}
