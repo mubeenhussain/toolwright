@@ -3,14 +3,14 @@ export const siteConfig = {
   tagline: "The best free calculator site for clear, instant answers",
   description:
     "Toolwright is the free calculator toolkit that puts the answer first — BMI, due dates, calories, age, macros, and more. No signup, US units, private by design.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://toolwright.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://toolwright.site",
   locale: "en_US",
   language: "en-US",
   /** Primary markets for search & content */
   markets: ["United States", "Canada", "United Kingdom", "Australia", "Ireland", "New Zealand"],
   marketCodes: ["US", "CA", "GB", "AU", "IE", "NZ"],
   twitter: "@toolwright",
-  email: "hello@toolwright.app",
+  email: "hello@toolwright.site",
 } as const;
 
 export function absoluteUrl(path = "/") {
