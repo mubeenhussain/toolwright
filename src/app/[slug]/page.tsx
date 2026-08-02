@@ -9,7 +9,9 @@ import {
   buildToolKeywords,
   buildToolTitle,
   faqJsonLd,
+  getToolSeoCopy,
   howToJsonLd,
+  mergeFaqs,
   toolJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site";
@@ -99,6 +101,10 @@ export async function generateMetadata({
         "max-video-preview": -1,
       },
     },
+    other: {
+      "geo.region": "US",
+      "content-language": "en-US",
+    },
   };
 }
 
@@ -115,6 +121,8 @@ export default async function ToolPage({ params }: PageProps) {
   const guides = getBlogPostsByTool(tool.slug)
     .sort((a, b) => Number(!!b.featured) - Number(!!a.featured))
     .slice(0, 3);
+  const seo = getToolSeoCopy(tool);
+  const faqs = mergeFaqs(tool);
 
   return (
     <>
@@ -128,7 +136,7 @@ export default async function ToolPage({ params }: PageProps) {
           ]),
           toolJsonLd(tool),
           howToJsonLd(tool),
-          faqJsonLd(tool.faqs),
+          faqJsonLd(faqs),
         ]}
       />
 
@@ -159,13 +167,13 @@ export default async function ToolPage({ params }: PageProps) {
 
         <header className="mt-4">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-            Free online {tool.shortName.toLowerCase()} calculator
+            Free online {tool.name.toLowerCase()}
           </p>
           <h1 className="mt-1 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
             {tool.name}
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted sm:text-base">
-            {tool.description}
+            {seo.searchIntro}
           </p>
           <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-faint">
             <li>Free · No signup</li>
@@ -182,7 +190,9 @@ export default async function ToolPage({ params }: PageProps) {
         {guides.length > 0 ? (
           <aside className="mt-6 max-w-3xl border border-line bg-bg-elevated p-4 text-sm">
             <p className="font-semibold text-ink">
-              {guides.length > 1 ? "Related guides & diet plans" : "Read the planning guide"}
+              {guides.length > 1
+                ? "Related guides & diet plans"
+                : "Read the planning guide"}
             </p>
             <p className="mt-1 text-ink-muted">
               Practical articles that pair with this calculator.
@@ -204,64 +214,42 @@ export default async function ToolPage({ params }: PageProps) {
 
         <section className="mt-12 max-w-3xl">
           <h2 className="font-display text-xl font-bold tracking-tight text-ink">
-            About this {tool.shortName.toLowerCase()} calculator
+            {seo.whatIsHeading}
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-            {tool.longDescription}
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-            Use this free online {tool.name.toLowerCase()} when you need a quick,
-            clear estimate without creating an account. Calculations run in your
-            browser on {siteConfig.name}, so your inputs stay private. Results are
-            for education and planning — confirm important financial, tax, or
-            health decisions with a qualified professional.
-          </p>
+          <p className="mt-3 text-sm leading-relaxed text-ink-muted">{seo.whatIs}</p>
         </section>
 
         <section className="mt-10 max-w-3xl">
           <h2 className="font-display text-xl font-bold tracking-tight text-ink">
-            How to use the {tool.name}
+            {seo.whoUsesHeading}
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-ink-muted">{seo.whoUses}</p>
+        </section>
+
+        <section className="mt-10 max-w-3xl">
+          <h2 className="font-display text-xl font-bold tracking-tight text-ink">
+            {seo.howHeading}
           </h2>
           <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-ink-muted">
-            <li>
-              Enter the values asked for in the form — amounts, rates, dates, or
-              measurements depending on the tool.
-            </li>
-            <li>
-              Tap calculate to see your result instantly. Adjust inputs anytime to
-              compare scenarios.
-            </li>
-            <li>
-              Review the breakdown and FAQs below if you want more context on what
-              the numbers mean.
-            </li>
+            {seo.howSteps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
           </ol>
         </section>
 
         <section className="mt-10 max-w-3xl">
           <h2 className="font-display text-xl font-bold tracking-tight text-ink">
-            Why people use {siteConfig.name}
+            {seo.benefitsHeading}
           </h2>
-          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink-muted">
-            <li>
-              <strong className="font-semibold text-ink">Clear answers</strong>{" "}
-              — dedicated page for the {tool.name.toLowerCase()}, built to load
-              fast and stay easy to read.
-            </li>
-            <li>
-              <strong className="font-semibold text-ink">Fast & free</strong> — no
-              paywall, no email gate, results above the noise.
-            </li>
-            <li>
-              <strong className="font-semibold text-ink">US-ready</strong> — copy and
-              units aimed at American and Western users.
-            </li>
-            <li>
-              <strong className="font-semibold text-ink">One toolkit</strong> — jump
-              to related {categoryLabel.toLowerCase()} tools without leaving the
-              site.
-            </li>
+          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-ink-muted">
+            {seo.benefits.map((b) => (
+              <li key={b}>{b}</li>
+            ))}
           </ul>
+          <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+            Results are for education and planning. Confirm important financial,
+            tax, or health decisions with a qualified professional when needed.
+          </p>
         </section>
 
         <section className="mt-10 max-w-3xl">
@@ -269,7 +257,7 @@ export default async function ToolPage({ params }: PageProps) {
             {tool.name} FAQ
           </h2>
           <div className="mt-4 divide-y divide-line border-t border-line">
-            {tool.faqs.map((faq) => (
+            {faqs.map((faq) => (
               <div key={faq.question} className="py-4">
                 <h3 className="text-sm font-semibold text-ink">{faq.question}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
@@ -281,12 +269,16 @@ export default async function ToolPage({ params }: PageProps) {
         </section>
 
         {related.length > 0 ? (
-          <nav aria-label="Related tools" className="mt-12 border-t border-line pt-8">
+          <nav
+            aria-label="Related tools"
+            className="mt-12 border-t border-line pt-8"
+          >
             <h2 className="font-display text-xl font-bold tracking-tight text-ink">
               Related free calculators
             </h2>
             <p className="mt-1 text-sm text-ink-muted">
-              More {categoryLabel.toLowerCase()} tools on {siteConfig.name}.
+              More {categoryLabel.toLowerCase()} tools people search for on{" "}
+              {siteConfig.name}.
             </p>
             <ul className="mt-5 grid gap-3 sm:grid-cols-2">
               {related.map((item) => (

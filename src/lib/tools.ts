@@ -59,39 +59,47 @@ export const tools: ToolDefinition[] = [
     name: "Age Calculator",
     shortName: "Age",
     description:
-      "Free age calculator to find exact age between two dates in years, months, weeks, days, hours, minutes, and seconds.",
+      "Free Age Calculator online — calculate exact age from date of birth in years, months, weeks, days, hours, minutes, and seconds.",
     longDescription:
-      "Enter a date of birth and an optional “age at” date to calculate age the way most Western countries count it — age increases on your birthday. Get a clear breakdown in years, months, and days, plus total weeks, days, hours, minutes, and seconds lived, and see how long until the next birthday. Different cultures count age differently; this tool follows the common birthday-based system used across most Western countries.",
+      "Looking for an Age Calculator? Enter a date of birth (and an optional “age at” date) to get your exact age the way most US and Western forms count it — your age increases on your birthday. See years, months, and days, plus total weeks, days, hours, minutes, and seconds lived, and how long until the next birthday. Unlike a rough year-only guess, this free Age Calculator is built for school forms, job paperwork, travel documents, sports age groups, and everyday “how old am I?” checks. Everything runs in your browser; we do not store your date of birth.",
     category: "calculators",
     keywords: [
       "age calculator",
+      "age calculator online",
       "calculate age",
-      "age from date of birth",
-      "how old am I",
       "exact age calculator",
+      "how old am I",
+      "age from date of birth",
       "date of birth calculator",
+      "age calculator years months days",
+      "free age calculator",
     ],
     featured: true,
     faqs: [
       {
-        question: "How does this age calculator count age?",
+        question: "How does this Age Calculator count age?",
         answer:
-          "It uses the common Western age system: your age increases on your birthday. For example, someone who has lived 3 years and 11 months is 3 years old until the next birthday.",
+          "It uses the common Western / US system: your age increases on your birthday. Someone who has lived 3 years and 11 months is still 3 years old until the next birthday.",
       },
       {
         question: "Can I calculate age on a past or future date?",
         answer:
-          "Yes. Set “Age at the date of” to any day on or after the date of birth to find age as of that date — useful for forms, milestones, and eligibility checks.",
+          "Yes. Set “Age at the date of” to any day on or after the date of birth — useful for forms, eligibility checks, and milestones.",
       },
       {
-        question: "Why can month and day results look confusing?",
+        question: "Does the Age Calculator show years, months, and days?",
         answer:
-          "Months have uneven lengths. We count calendar months from the birth day (for example Feb 20 → Mar 20 is one month). When the start day is near month-end, remaining days follow that same day-based method.",
+          "Yes. You get an exact breakdown in years, months, and days, plus totals in weeks, days, hours, minutes, and seconds, and a next-birthday countdown.",
       },
       {
         question: "Is my date of birth stored?",
         answer:
           "No. Age is calculated entirely in your browser. Nothing is uploaded or saved on our servers.",
+      },
+      {
+        question: "Is this Age Calculator free?",
+        answer:
+          "Yes. It is free to use with no signup. Open the page, enter dates, and get results instantly.",
       },
     ],
   },

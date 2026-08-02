@@ -1,28 +1,21 @@
 import { siteConfig, absoluteUrl } from "@/lib/site";
 import type { ToolDefinition } from "@/lib/tools";
 import { categories } from "@/lib/tools";
+import {
+  buildToolDescription,
+  buildToolKeywords,
+  buildToolTitle,
+  getToolSeoCopy,
+  mergeFaqs,
+} from "@/lib/seo-copy";
 
-/** Primary SERP title — keyword first, under ~60 chars before brand template. */
-export function buildToolTitle(tool: ToolDefinition) {
-  return `Free ${tool.name} Online`;
-}
-
-/** Compelling meta description with primary keyword + intent + CTA. */
-export function buildToolDescription(tool: ToolDefinition) {
-  const base = tool.description.replace(/\.$/, "");
-  return `${base}. Instant results, free, no signup — calculate now on ${siteConfig.name}.`;
-}
-
-export function buildToolKeywords(tool: ToolDefinition) {
-  const extras = [
-    `free ${tool.name.toLowerCase()}`,
-    `online ${tool.name.toLowerCase()}`,
-    `${tool.shortName.toLowerCase()} calculator`,
-    `${tool.name.toLowerCase()} USA`,
-    `best ${tool.name.toLowerCase()}`,
-  ];
-  return Array.from(new Set([...tool.keywords, ...extras]));
-}
+export {
+  buildToolDescription,
+  buildToolKeywords,
+  buildToolTitle,
+  getToolSeoCopy,
+  mergeFaqs,
+};
 
 export function websiteJsonLd() {
   return {
@@ -88,6 +81,7 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
 
 export function toolJsonLd(tool: ToolDefinition) {
   const url = absoluteUrl(`/${tool.slug}`);
+  const seo = getToolSeoCopy(tool);
   const appCategory =
     tool.category === "finance"
       ? "FinanceApplication"
@@ -101,9 +95,9 @@ export function toolJsonLd(tool: ToolDefinition) {
     "@context": "https://schema.org",
     "@type": ["WebApplication", "SoftwareApplication"],
     name: tool.name,
-    alternateName: [`Free ${tool.name}`, `Online ${tool.name}`],
+    alternateName: [`Free ${tool.name}`, `Online ${tool.name}`, `${tool.name} Online`],
     url,
-    description: tool.description,
+    description: seo.description,
     applicationCategory: appCategory,
     applicationSubCategory: categories[tool.category].label,
     operatingSystem: "Any",
@@ -112,14 +106,8 @@ export function toolJsonLd(tool: ToolDefinition) {
     inLanguage: siteConfig.language,
     isAccessibleForFree: true,
     countriesSupported: siteConfig.marketCodes.join(", "),
-    keywords: buildToolKeywords(tool).join(", "),
-    featureList: [
-      "Free to use",
-      "No signup required",
-      "Instant results",
-      "Private browser-side calculation",
-      "Mobile friendly",
-    ],
+    keywords: seo.keywords.join(", "),
+    featureList: seo.benefits,
     offers: {
       "@type": "Offer",
       price: "0",
@@ -141,36 +129,23 @@ export function toolJsonLd(tool: ToolDefinition) {
 }
 
 export function howToJsonLd(tool: ToolDefinition) {
+  const seo = getToolSeoCopy(tool);
   return {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name: `How to use the ${tool.name}`,
-    description: tool.longDescription,
+    name: seo.howHeading,
+    description: seo.whatIs,
     totalTime: "PT1M",
     tool: {
       "@type": "HowToTool",
       name: tool.name,
     },
-    step: [
-      {
-        "@type": "HowToStep",
-        position: 1,
-        name: "Enter your numbers",
-        text: `Open the free ${tool.name} and fill in the required fields with your values.`,
-      },
-      {
-        "@type": "HowToStep",
-        position: 2,
-        name: "Calculate",
-        text: "Click calculate to get an instant result — no account or download needed.",
-      },
-      {
-        "@type": "HowToStep",
-        position: 3,
-        name: "Review the result",
-        text: "Read the estimate and related details. Results are educational; verify important decisions with a professional when needed.",
-      },
-    ],
+    step: seo.howSteps.map((text, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: `Step ${index + 1}`,
+      text,
+    })),
   };
 }
 
