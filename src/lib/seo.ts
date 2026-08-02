@@ -30,6 +30,7 @@ export function websiteJsonLd() {
       "@type": "Organization",
       name: siteConfig.name,
       url: siteConfig.url,
+      logo: absoluteUrl(siteConfig.icon),
     },
     audience: {
       "@type": "Audience",
@@ -55,7 +56,8 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: siteConfig.name,
     url: siteConfig.url,
-    logo: absoluteUrl(siteConfig.logo),
+    logo: absoluteUrl(siteConfig.icon),
+    image: absoluteUrl(siteConfig.icon),
     description: siteConfig.description,
     email: siteConfig.email,
     areaServed: siteConfig.marketCodes.map((code) => ({
@@ -96,9 +98,15 @@ export function toolJsonLd(tool: ToolDefinition) {
     "@context": "https://schema.org",
     "@type": ["WebApplication", "SoftwareApplication"],
     name: tool.name,
-    alternateName: [`Free ${tool.name}`, `Online ${tool.name}`, `${tool.name} Online`],
+    alternateName: [
+      `Free ${tool.name}`,
+      `Online ${tool.name}`,
+      `${tool.name} Online`,
+      `Free ${tool.name} Online`,
+    ],
     url,
     description: seo.description,
+    image: absoluteUrl(siteConfig.icon),
     applicationCategory: appCategory,
     applicationSubCategory: categories[tool.category].label,
     operatingSystem: "Any",
@@ -125,6 +133,10 @@ export function toolJsonLd(tool: ToolDefinition) {
       "@type": "Organization",
       name: siteConfig.name,
       url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl(siteConfig.icon),
+      },
     },
   };
 }

@@ -82,7 +82,7 @@ const overrides: Partial<Record<string, Partial<ToolSeoCopy>>> = {
   "age-calculator": {
     title: "Age Calculator",
     description:
-      "Free Age Calculator to find exact age from date of birth in years, months, weeks, days, hours & seconds. Instant, private, no signup.",
+      "Free Age Calculator — exact age from date of birth in years, months & days. Next birthday countdown. Private, instant, no signup.",
     keywords: [
       "age calculator",
       "calculate age",
@@ -93,6 +93,7 @@ const overrides: Partial<Record<string, Partial<ToolSeoCopy>>> = {
       "date of birth age calculator",
       "age calculator years months days",
       "free age calculator",
+      "online age calculator",
     ],
     searchIntro:
       "Calculate your exact age online from your date of birth — years, months, days, and more in one click.",
@@ -241,7 +242,7 @@ function baseCopy(tool: ToolDefinition): ToolSeoCopy {
 
   return {
     title: name,
-    description: `Free ${name} online — ${tool.description.replace(/\.$/, "")}. Instant results on ${siteConfig.name}, no signup, private in your browser.`,
+    description: `Free ${name} online. ${tool.description.replace(/\.$/, "")}. Instant results, private in your browser — no signup.`,
     keywords: Array.from(
       new Set([
         l,
@@ -308,16 +309,20 @@ export function getToolSeoCopy(tool: ToolDefinition): ToolSeoCopy {
 
 export function buildToolTitle(tool: ToolDefinition) {
   const copy = getToolSeoCopy(tool);
-  // Keep under ~55 chars before "| Brand" for SERP display
   const t = copy.title.trim();
-  if (t.length <= 48) return `${t} — Free Online`;
+  // Competitor-style SERP titles: "Free Age Calculator Online"
+  if (/^free\b/i.test(t)) {
+    return /online$/i.test(t) ? t : `${t} Online`;
+  }
+  if (t.length <= 36) return `Free ${t} Online`;
+  if (t.length <= 48) return `Free ${t}`;
   return t;
 }
 
 export function buildToolDescription(tool: ToolDefinition) {
   const d = getToolSeoCopy(tool).description.trim();
-  if (d.length <= 160) return d;
-  return `${d.slice(0, 157).replace(/\s+\S*$/, "")}…`;
+  if (d.length <= 158) return d;
+  return `${d.slice(0, 155).replace(/\s+\S*$/, "")}…`;
 }
 
 export function buildToolKeywords(tool: ToolDefinition) {

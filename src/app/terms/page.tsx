@@ -6,7 +6,8 @@ import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
-  description: `Terms of Use for ${siteConfig.name} — rules for using our free online calculators and tools.`,
+  description: `Terms of Use for ${siteConfig.name}: using free calculators for education and planning — not professional financial, legal, or medical advice.`,
+  robots: { index: true, follow: true },
   alternates: {
     canonical: absoluteUrl("/terms"),
   },

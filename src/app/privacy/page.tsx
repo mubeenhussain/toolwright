@@ -6,7 +6,8 @@ import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: `Privacy Policy for ${siteConfig.name} — how we handle information, cookies, and advertising on our free calculator site.`,
+  description: `Privacy Policy for ${siteConfig.name}: what we collect (usually little), cookies, ads, and how calculator inputs stay in your browser.`,
+  robots: { index: true, follow: true },
   alternates: {
     canonical: absoluteUrl("/privacy"),
   },

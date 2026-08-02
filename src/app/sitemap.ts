@@ -1,44 +1,45 @@
 import { getAllBlogPosts } from "@/lib/blog";
-import { siteConfig } from "@/lib/site";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 import { tools } from "@/lib/tools";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
+  const base = siteConfig.url.replace(/\/$/, "");
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: siteConfig.url,
+      url: base,
       lastModified,
       changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: `${siteConfig.url}/tools`,
+      url: absoluteUrl("/tools"),
       lastModified,
       changeFrequency: "daily",
       priority: 0.95,
     },
     {
-      url: `${siteConfig.url}/blog`,
+      url: absoluteUrl("/blog"),
       lastModified,
       changeFrequency: "daily",
       priority: 0.92,
     },
     {
-      url: `${siteConfig.url}/about`,
+      url: absoluteUrl("/about"),
       lastModified,
       changeFrequency: "monthly",
       priority: 0.4,
     },
     {
-      url: `${siteConfig.url}/privacy`,
+      url: absoluteUrl("/privacy"),
       lastModified,
       changeFrequency: "yearly",
       priority: 0.2,
     },
     {
-      url: `${siteConfig.url}/terms`,
+      url: absoluteUrl("/terms"),
       lastModified,
       changeFrequency: "yearly",
       priority: 0.2,
@@ -46,18 +47,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const toolRoutes: MetadataRoute.Sitemap = tools.map((tool) => ({
-    url: `${siteConfig.url}/${tool.slug}`,
+    url: absoluteUrl(`/${tool.slug}`),
     lastModified,
     changeFrequency: tool.featured ? ("weekly" as const) : ("monthly" as const),
     priority: tool.featured ? 0.9 : 0.75,
   }));
 
-  const blogRoutes: MetadataRoute.Sitemap = getAllBlogPosts().map((post) => ({
-    url: `${siteConfig.url}/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt),
-    changeFrequency: post.featured ? ("weekly" as const) : ("monthly" as const),
-    priority: post.featured ? 0.85 : 0.7,
-  }));
+  let blogRoutes: MetadataRoute.Sitemap = [];
+  try {
+    blogRoutes = getAllBlogPosts().map((post) => ({
+      url: absoluteUrl(`/blog/${post.slug}`),
+      lastModified: new Date(post.updatedAt || post.publishedAt),
+      changeFrequency: post.featured
+        ? ("weekly" as const)
+        : ("monthly" as const),
+      priority: post.featured ? 0.85 : 0.7,
+    }));
+  } catch {
+    // Prefer a tools-only sitemap over a 500 if blog generation fails.
+    blogRoutes = [];
+  }
 
   return [...staticRoutes, ...toolRoutes, ...blogRoutes];
 }

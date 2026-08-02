@@ -5,16 +5,16 @@ import { breadcrumbJsonLd, organizationJsonLd } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Toolwright — Built in the USA",
+  title: "About Toolwright",
   description:
-    "Toolwright is an American-built site for free online calculators — BMI, due dates, calories, age, and more. Made for people in the US who want a straight answer without the junk.",
+    "About Toolwright — free online calculators (Age, mortgage, BMI, pregnancy & more). Fast answers, US-ready defaults, private in your browser.",
   alternates: {
     canonical: absoluteUrl("/about"),
   },
   openGraph: {
     title: `About | ${siteConfig.name}`,
     description:
-      "An American project: free calculators with US units, clear English, and no signup nonsense.",
+      "Free calculators with US units, clear English, and no signup wall — Age Calculator, mortgage, BMI, and 100+ tools.",
     url: absoluteUrl("/about"),
     locale: "en_US",
   },

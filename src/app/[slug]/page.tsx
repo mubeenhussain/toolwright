@@ -14,6 +14,7 @@ import {
   mergeFaqs,
   toolJsonLd,
 } from "@/lib/seo";
+import { defaultOgImage } from "@/lib/seo-meta";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 import { getBlogPostsByTool } from "@/lib/blog";
 import {
@@ -60,6 +61,7 @@ export async function generateMetadata({
   const description = buildToolDescription(tool);
   const url = absoluteUrl(`/${tool.slug}`);
   const keywords = buildToolKeywords(tool);
+  const ogTitle = `${title} | ${siteConfig.name}`;
 
   return {
     title,
@@ -77,18 +79,20 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: `${tool.name} | Free Online Calculator`,
+      title: ogTitle,
       description,
       url,
       type: "website",
       siteName: siteConfig.name,
       locale: siteConfig.locale,
+      images: [defaultOgImage],
     },
     twitter: {
-      card: "summary_large_image",
-      title: `${tool.name} | Free Online Calculator`,
+      card: "summary",
+      title: ogTitle,
       description,
       creator: siteConfig.twitter,
+      images: [defaultOgImage.url],
     },
     robots: {
       index: true,

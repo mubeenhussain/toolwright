@@ -28,9 +28,10 @@ export async function generateMetadata({
   const category = params.category;
   const title = category
     ? `${category[0]?.toUpperCase()}${category.slice(1)} guides`
-    : "Diet plans & calculator guides";
-  const description =
-    "Free American diet plans, calorie strategies, and calculator guides from Toolwright — mortgage, health, pregnancy, macros, and more.";
+    : "Diet Plans & Calculator Guides";
+  const description = category
+    ? `${title} from Toolwright — practical US-focused tips that link back to free online calculators.`
+    : "Free US diet plans and calculator guides: age, mortgage, BMI, calories, pregnancy, macros & more — from Toolwright.";
   const url = absoluteUrl(
     category ? `/blog?category=${category}` : "/blog",
   );

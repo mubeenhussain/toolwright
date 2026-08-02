@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Figtree } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import {
+  defaultOgImage,
+  homeDescription,
+  homeKeywords,
+  homeTitle,
+} from "@/lib/seo-meta";
+import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -17,68 +23,44 @@ const sans = Figtree({
   display: "swap",
 });
 
+const defaultTitle = `${siteConfig.name} — ${homeTitle}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Free Online Calculators for the US & West`,
+    default: defaultTitle,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description: homeDescription,
   applicationName: siteConfig.name,
   icons: {
     icon: [
-      { url: "/toolwright-icon.png", type: "image/png", sizes: "512x512" },
+      { url: siteConfig.icon, type: "image/png", sizes: "512x512" },
+      { url: "/favicon.png", type: "image/png", sizes: "48x48" },
     ],
-    apple: [{ url: "/toolwright-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: siteConfig.icon, sizes: "180x180", type: "image/png" }],
   },
-  keywords: [
-    "free online calculator",
-    "mortgage calculator",
-    "loan calculator",
-    "BMI calculator",
-    "compound interest calculator",
-    "calorie calculator",
-    "pregnancy due date calculator",
-    "age calculator",
-    "TDEE calculator",
-    "macro calculator",
-    "paycheck calculator",
-    "credit card payoff calculator",
-    "online tools USA",
-  ],
+  keywords: [...homeKeywords],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
-  alternates: {
-    canonical: absoluteUrl("/"),
-    languages: {
-      "en-US": absoluteUrl("/"),
-      en: absoluteUrl("/"),
-    },
-  },
+  // Canonical lives on each page — do not pin "/" here (hurts deep pages).
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
     alternateLocale: ["en_GB", "en_CA", "en_AU"],
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Free Calculators for the US & West`,
-    description: siteConfig.description,
-    images: [
-      {
-        url: siteConfig.logo,
-        width: 512,
-        height: 512,
-        alt: siteConfig.name,
-      },
-    ],
+    title: defaultTitle,
+    description: homeDescription,
+    images: [defaultOgImage],
   },
   twitter: {
     card: "summary",
-    title: `${siteConfig.name} — Free Calculators for the US & West`,
-    description: siteConfig.description,
+    title: defaultTitle,
+    description: homeDescription,
     creator: siteConfig.twitter,
-    images: [siteConfig.logo],
+    images: [defaultOgImage.url],
   },
   other: {
     "geo.region": "US",

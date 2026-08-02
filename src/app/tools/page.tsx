@@ -56,14 +56,21 @@ export async function generateMetadata({
   return {
     title: "All Free Online Calculators & Tools",
     description:
-      "Browse free online calculators from Toolwright: mortgage, loan, BMI, calorie, pregnancy, compound interest, paycheck, and more.",
+      "Browse 100+ free calculators: Age Calculator, mortgage, BMI, calories, due date, paycheck, macros & more. Instant results, no signup.",
+    keywords: [
+      "free online calculators",
+      "online tools",
+      "age calculator",
+      "mortgage calculator",
+      "bmi calculator",
+    ],
     alternates: {
       canonical: absoluteUrl("/tools"),
     },
     openGraph: {
       title: `All Free Online Tools | ${siteConfig.name}`,
       description:
-        "Browse free browser-based calculators for finance, health, pregnancy, and everyday tasks.",
+        "Browse free browser-based calculators for finance, health, pregnancy, age, and everyday tasks.",
       url: absoluteUrl("/tools"),
     },
   };

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { BrandLogo } from "@/components/BrandLogo";
 import { CategoryIcon } from "@/components/CategoryVisual";
@@ -11,10 +12,16 @@ import {
   itemListJsonLd,
 } from "@/lib/seo";
 import {
+  defaultOgImage,
+  homeDescription,
+  homeKeywords,
+  homeTitle,
+} from "@/lib/seo-meta";
+import {
   landingCategoryImages,
   landingHero,
 } from "@/lib/landing-images";
-import { siteConfig } from "@/lib/site";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 import {
   getToolBySlug,
   getToolsByCategory,
@@ -22,6 +29,33 @@ import {
   categories,
 } from "@/lib/tools";
 import type { ToolCategory } from "@/lib/tool-types";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: `${siteConfig.name} — ${homeTitle}`,
+  },
+  description: homeDescription,
+  keywords: [...homeKeywords],
+  alternates: {
+    canonical: absoluteUrl("/"),
+    languages: {
+      "en-US": absoluteUrl("/"),
+      en: absoluteUrl("/"),
+    },
+  },
+  openGraph: {
+    title: `${siteConfig.name} — ${homeTitle}`,
+    description: homeDescription,
+    url: absoluteUrl("/"),
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary",
+    title: `${siteConfig.name} — ${homeTitle}`,
+    description: homeDescription,
+    images: [defaultOgImage.url],
+  },
+};
 
 const popularSlugs = [
   "age-calculator",
@@ -125,11 +159,11 @@ export default function HomePage() {
             <BrandLogo linked={false} size="lg" priority />
           </div>
           <h1 className="mt-6 max-w-2xl font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
-            Free calculators for clear, instant answers
+            Free Age Calculator &amp; 100+ online tools
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg">
-            {siteConfig.tagline} {toolCount}+ tools for money, health,
-            pregnancy, and everyday math — get the number fast.
+            {siteConfig.tagline} Mortgage, BMI, calories, due dates, and everyday
+            math — clear answers in seconds, private in your browser.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link

@@ -2,9 +2,12 @@ export const siteConfig = {
   name: "Toolwright",
   tagline: "Useful tools. Simple solutions.",
   description:
-    "Free online calculators for mortgage, loans, BMI, pregnancy, calories, taxes, and more. Instant results, US units, no signup — Toolwright.",
+    "Free Age Calculator, mortgage, BMI, calorie, due date & 100+ online tools. Instant results, US-ready units, private in your browser — no signup.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://toolwright.site",
+  /** Full lockup (header / footer) */
   logo: "/toolwright.png",
+  /** Square app icon (favicon, OG, schema) */
+  icon: "/toolwright-icon.png",
   locale: "en_US",
   language: "en-US",
   /** Primary markets for search & content */
