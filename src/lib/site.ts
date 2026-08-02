@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Toolwright",
   tagline: "Useful tools. Simple solutions.",
   description:
-    "Free Age Calculator, mortgage, BMI, calorie, due date & 100+ online tools. Instant results, US-ready units, private in your browser — no signup.",
+    "Free Age Calculator, mortgage, BMI, calorie, due date and 100+ online tools. Instant results, US-ready units, private in your browser - no signup.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://toolwright.site",
   /** Full lockup (header / footer) */
   logo: "/toolwright.png",
@@ -19,6 +19,7 @@ export const siteConfig = {
 
 export function absoluteUrl(path = "/") {
   const base = siteConfig.url.replace(/\/$/, "");
+  if (path === "/" || path === "") return base;
   const normalized = path.startsWith("/") ? path : `/${path}`;
   return `${base}${normalized}`;
 }

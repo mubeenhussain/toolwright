@@ -1,6 +1,6 @@
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
-/** Square brand mark — better for Google favicon & social cards than the wordmark. */
+/** Square brand mark for favicon, OG, and schema (not the wide wordmark). */
 export const brandIconUrl = absoluteUrl(siteConfig.icon);
 
 export const defaultOgImage = {
@@ -12,13 +12,13 @@ export const defaultOgImage = {
 
 /**
  * Homepage title fragment (paired with brand).
- * Full SERP title ≈ "Toolwright — Free Age, Mortgage, BMI & Online Calculators"
+ * Full SERP: "Toolwright - Free Age, Mortgage, BMI & Online Calculators"
  */
 export const homeTitle = "Free Age, Mortgage, BMI & Online Calculators";
 
-/** Unique homepage meta description (~155 chars). Names flagship tools Google looks for. */
+/** Unique homepage meta description (~155 chars). Lead with Age Calculator. */
 export const homeDescription =
-  "Free Age Calculator, mortgage, BMI, calorie, due date & 100+ tools. Instant results, US-ready units, private in your browser — no signup.";
+  "Free Age Calculator, mortgage, BMI, calorie, due date and 100+ tools. Instant results, US-ready units, private in your browser - no signup.";
 
 export const homeKeywords = [
   "free online calculator",
@@ -34,5 +34,6 @@ export const homeKeywords = [
   "macro calculator",
   "pregnancy calculator",
   "toolwright",
+  "toolwright.site",
   "online tools USA",
 ] as const;

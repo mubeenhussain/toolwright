@@ -82,7 +82,7 @@ const overrides: Partial<Record<string, Partial<ToolSeoCopy>>> = {
   "age-calculator": {
     title: "Age Calculator",
     description:
-      "Free Age Calculator — exact age from date of birth in years, months & days. Next birthday countdown. Private, instant, no signup.",
+      "Free Age Calculator - exact age from date of birth in years, months and days. Next birthday countdown. Private, instant, no signup.",
     keywords: [
       "age calculator",
       "calculate age",

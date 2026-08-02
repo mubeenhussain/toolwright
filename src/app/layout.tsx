@@ -23,7 +23,7 @@ const sans = Figtree({
   display: "swap",
 });
 
-const defaultTitle = `${siteConfig.name} — ${homeTitle}`;
+const defaultTitle = `${siteConfig.name} - ${homeTitle}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

@@ -32,7 +32,7 @@ import type { ToolCategory } from "@/lib/tool-types";
 
 export const metadata: Metadata = {
   title: {
-    absolute: `${siteConfig.name} — ${homeTitle}`,
+    absolute: `${siteConfig.name} - ${homeTitle}`,
   },
   description: homeDescription,
   keywords: [...homeKeywords],
@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: `${siteConfig.name} — ${homeTitle}`,
+    title: `${siteConfig.name} - ${homeTitle}`,
     description: homeDescription,
     url: absoluteUrl("/"),
     images: [defaultOgImage],
   },
   twitter: {
     card: "summary",
-    title: `${siteConfig.name} — ${homeTitle}`,
+    title: `${siteConfig.name} - ${homeTitle}`,
     description: homeDescription,
     images: [defaultOgImage.url],
   },
