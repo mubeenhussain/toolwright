@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { siteConfig } from "@/lib/site";
+import { BrandLogo } from "@/components/BrandLogo";
 
 const links = [
   { href: "/tools", label: "Tools" },
@@ -11,11 +11,7 @@ export function Header() {
   return (
     <header className="relative z-20 border-b border-line bg-white">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-5 py-2.5 sm:px-8">
-        <Link href="/" className="group flex items-baseline gap-2">
-          <span className="font-display text-xl font-extrabold tracking-tight text-ink group-hover:text-accent">
-            {siteConfig.name}
-          </span>
-        </Link>
+        <BrandLogo size="sm" priority />
         <nav aria-label="Primary" className="flex items-center gap-1">
           {links.map((link) => (
             <Link

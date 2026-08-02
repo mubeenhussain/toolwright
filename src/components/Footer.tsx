@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/BrandLogo";
 import { siteConfig } from "@/lib/site";
 import { categories, tools, type ToolCategory } from "@/lib/tools";
 
@@ -17,12 +18,10 @@ export function Footer() {
     <footer className="relative z-10 mt-auto border-t border-line bg-bg-elevated">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
-          <p className="font-display text-xl font-bold tracking-tight text-ink">
-            {siteConfig.name}
-          </p>
+          <BrandLogo size="md" />
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-muted">
-            Free online calculators for mortgages, loans, health, pregnancy, and
-            everyday math — built for the US and the West.
+            {siteConfig.tagline} Free online calculators for mortgages, loans,
+            health, pregnancy, and everyday math.
           </p>
         </div>
         <div>

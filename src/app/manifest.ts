@@ -12,5 +12,13 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#1d4ed8",
     lang: "en",
     categories: ["utilities", "productivity", "developer"],
+    icons: [
+      {
+        src: "/toolwright-icon.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+    ],
   };
 }

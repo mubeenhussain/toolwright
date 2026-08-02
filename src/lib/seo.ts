@@ -55,6 +55,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: siteConfig.name,
     url: siteConfig.url,
+    logo: absoluteUrl(siteConfig.logo),
     description: siteConfig.description,
     email: siteConfig.email,
     areaServed: siteConfig.marketCodes.map((code) => ({

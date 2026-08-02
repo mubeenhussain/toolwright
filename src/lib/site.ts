@@ -1,9 +1,10 @@
 export const siteConfig = {
   name: "Toolwright",
-  tagline: "The best free calculator site for clear, instant answers",
+  tagline: "Useful tools. Simple solutions.",
   description:
     "Free online calculators for mortgage, loans, BMI, pregnancy, calories, taxes, and more. Instant results, US units, no signup — Toolwright.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://toolwright.site",
+  logo: "/toolwright.png",
   locale: "en_US",
   language: "en-US",
   /** Primary markets for search & content */

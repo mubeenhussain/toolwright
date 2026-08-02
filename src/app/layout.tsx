@@ -25,6 +25,12 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  icons: {
+    icon: [
+      { url: "/toolwright-icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/toolwright-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   keywords: [
     "free online calculator",
     "mortgage calculator",
@@ -58,12 +64,21 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} — Free Calculators for the US & West`,
     description: siteConfig.description,
+    images: [
+      {
+        url: siteConfig.logo,
+        width: 512,
+        height: 512,
+        alt: siteConfig.name,
+      },
+    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: `${siteConfig.name} — Free Calculators for the US & West`,
     description: siteConfig.description,
     creator: siteConfig.twitter,
+    images: [siteConfig.logo],
   },
   other: {
     "geo.region": "US",

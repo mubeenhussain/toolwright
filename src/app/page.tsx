@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/BrandLogo";
 import { CategoryIcon } from "@/components/CategoryVisual";
 import { JsonLd } from "@/components/JsonLd";
 import { SafeImage } from "@/components/SafeImage";
@@ -120,17 +121,15 @@ export default function HomePage() {
           aria-hidden
         />
         <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20">
-          <p className="font-display text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
-            <span className="border-b-2 border-[#93c5fd] pb-1">
-              {siteConfig.name}
-            </span>
-          </p>
-          <h1 className="mt-5 max-w-2xl font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
+          <div className="inline-flex rounded-xl bg-white/95 p-2.5 shadow-lg backdrop-blur-sm">
+            <BrandLogo linked={false} size="lg" priority />
+          </div>
+          <h1 className="mt-6 max-w-2xl font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
             Free calculators for clear, instant answers
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg">
-            {toolCount}+ tools for money, health, pregnancy, and everyday math —
-            open any calculator and get the number fast.
+            {siteConfig.tagline} {toolCount}+ tools for money, health,
+            pregnancy, and everyday math — get the number fast.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
